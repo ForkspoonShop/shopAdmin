@@ -7,6 +7,7 @@ const todo = (state, action) => {
                 id: indexProduct++,
                 url: action.url,
                 cost: action.cost,
+                category: action.category,
             };
         case 'DELETE_PRODUCT':
             if (state.id !== action.id) {
@@ -21,7 +22,7 @@ const todo = (state, action) => {
     }
 };
 
-const products = (state = [{id: 0, url: "./img/IMG_1.jpg", cost: "500"}, {id: 1, url: "./img/IMG_2.jpg", cost: "300"}], action) =>   {
+const products = (state = [{id: 0, url: "./img/IMG_1.jpg", cost: "500", category: "Броши"}, {id: 1, url: "./img/IMG_2.jpg", cost: "300", category: "Броши"}], action) =>   {
     switch (action.type) {
         case 'ADD_PRODUCT':
             return [

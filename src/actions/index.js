@@ -1,8 +1,9 @@
-export const addProduct = (url,cost) => {
+export const addProduct = (url,cost,category) => {
     return {
         type: 'ADD_PRODUCT',
         url,
         cost,
+        category,
     }
 };
 

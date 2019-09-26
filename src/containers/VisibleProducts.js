@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import ProductsList from '../components/ProductsList'
-import {addProductToBasket} from '../actions'
+import {deleteProduct} from '../actions'
 
 const getVisibleProduct = (products, filter) => {
     switch (filter) {
@@ -22,8 +22,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddProduct: (id) => {
-            dispatch(addProductToBasket(id))
+        onDelProduct: (id) => {
+            dispatch(deleteProduct(id))
         }
     }
 };
