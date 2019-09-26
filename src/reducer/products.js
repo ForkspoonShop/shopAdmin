@@ -13,7 +13,7 @@ const todo = (state, action) => {
             if (state.id !== action.id) {
                 return state
             }
-            console.log('2',state);
+            console.log('255',state);
             return Object.assign({}, state, {
                 completed: !state.completed
             });
@@ -29,8 +29,8 @@ const products = (state = [{id: 0, url: "./img/IMG_1.jpg", cost: "500", category
                 ...state,
                 todo(undefined, action)
             ];
-        case 'DELETE_TODO':
-            console.log('1',state);
+        case 'DELETE_PRODUCT':
+            console.log('1',state,action);
             return state.map(t =>
                 todo(t, action)
             );
