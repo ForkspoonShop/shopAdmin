@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProductsList = ({products, onDelProduct}) => {
-    const classes = useStyles;
+    const classes = useStyles;console.log('ProductsList',products);
     return (
         <Paper className={classes.button}>
             <Table className={classes.table}>
@@ -26,7 +26,8 @@ const ProductsList = ({products, onDelProduct}) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {products.map(product => (
+                    {
+                        products.map(product => (
                         <TableRow key={product.id}>
                             <TableCell component="th" scope="row">
                                 {product.id}
