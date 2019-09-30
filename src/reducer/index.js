@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import products from './products'
-import basket from './basket'
+import isloading from './isloading'
 
 const reducer = combineReducers({
     products,
-    basket
+    isloading,
 });
 
 export default reducer

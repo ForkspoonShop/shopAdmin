@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addProduct} from '../actions'
-import {FormControl, InputLabel, Input,  Button, Paper, MenuItem, Select} from "@material-ui/core";
+import {FormControl, InputLabel, Button, Paper, MenuItem, Select, TextField} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
@@ -15,62 +15,69 @@ const useStyles = makeStyles(theme => ({
 }));
 
 let AddProduct = ({dispatch}) => {
-    let inputUrl, inputName, inputDescription, inputCost;
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        age: '',
+        url: '',
+        name: '',
+        cost: '',
+        description: '',
+        category: '',
     });
 
+
     const handleChange = event => {
-        console.log(event.target.name,event.target.value,setValues);
-        setValues(oldValues => ({
-            ...oldValues,
-            [event.target.name]: event.target.value,
-        }));
+        setValues({...values, [event.target.name]: event.target.value});
     };
 
     return (
         <Paper className={classes.paper}>
             <form onSubmit={e => {
                 e.preventDefault();
-                dispatch(addProduct(inputUrl.value, inputName.value, inputCost.value, inputDescription.value, values.age));
-                inputUrl.value = '';
-                inputName.value = '';
-                inputCost.value = '';
-                inputDescription.value = '';
-                values.age = '';
+                console.log(values.url);
+                dispatch(addProduct(values.url, values.name, values.cost, values.description, values.category));
+                setValues({url: '',
+                    name: '',
+                    cost: '',
+                    description: '',
+                    category: '',
+                });
             }}>
+
+                <TextField
+                    label="URL"
+                    name='url'
+                    value={values.url}
+                    className={classes.button}
+                    onChange={handleChange}
+                />
+                <TextField
+                    label="Имя"
+                    name='name'
+                    value={values.name}
+                    className={classes.button}
+                    onChange={handleChange}
+                />
+                <TextField
+                    label="Стоимость"
+                    name='cost'
+                    value={values.cost}
+                    className={classes.button}
+                    onChange={handleChange}
+                />
+                <TextField
+                    label="Описание"
+                    name='description'
+                    value={values.description}
+                    className={classes.button}
+                    onChange={handleChange}
+                />
                 <FormControl className={classes.button}>
-                    <InputLabel htmlFor="Url">URL</InputLabel>
-                    <Input id="Url" ref={node => {
-                        inputUrl = node
-                    }} placeholder='./img/IMG_1.jpg'/>
-                </FormControl>
-                <FormControl className={classes.button}>
-                    <InputLabel htmlFor="name">Название</InputLabel>
-                    <Input id="name" ref={node => {
-                        inputName = node
-                    }} placeholder='ракета'/>
-                </FormControl>
-                <FormControl className={classes.button}>
-                    <InputLabel htmlFor="Cost">Стоимость</InputLabel>
-                    <Input id="Cost" ref={node => {
-                        inputCost = node
-                    }} placeholder='1500'/>
-                </FormControl>
-                <FormControl className={classes.button}>
-                    <InputLabel htmlFor="description">Описание</InputLabel>
-                    <Input id="description" ref={node => {
-                        inputDescription = node
-                    }} placeholder='Брошь в виде ракеты 8см'/>
-                </FormControl>
-                <FormControl className={classes.button}>
-                    <InputLabel htmlFor="Category" labelWidth='10'>Категории</InputLabel>
+                    <InputLabel htmlFor="Category">Категории</InputLabel>
                     <Select
-                        value={values.age}
+                        value={values.category}
                         onChange={handleChange}
                         inputProps={{
-                            name: 'age',
+                            name: 'category',
                             id: 'Category',
                         }}
                     >
@@ -86,7 +93,6 @@ let AddProduct = ({dispatch}) => {
         </Paper>
     )
 };
-
 
 AddProduct = connect()(AddProduct);
 
