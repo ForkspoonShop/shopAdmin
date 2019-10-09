@@ -4,10 +4,11 @@ const todo = (state, action) => {
     switch (action.type) {
         case 'ADD_PRODUCT':
             return {
-                id: indexProduct++,
-                url: action.url,
-                cost: action.cost,
-                category: action.category,
+                ID: indexProduct++,
+                URL: action.url,
+                Cost: action.cost,
+                Description: action.description,
+                Category: action.category,
             };
         case 'DELETE_PRODUCT':
             if (state.id !== action.id) {
@@ -22,7 +23,7 @@ const todo = (state, action) => {
     }
 };
 
-const products = (state = [{id: 0, url: "./img/IMG_1.jpg", cost: "500", category: "Броши"}, {id: 1, url: "./img/IMG_2.jpg", cost: "300", category: "Броши"}], action) =>   {
+const products = (state = [{ID: 0, URL: "./img/IMG_1.jpg", Name: "Ёжик", Description:"Брошь ручной работы из дерева 5см", Cost: "500", Category: "Броши"}], action) =>   {
 
     switch (action.type) {
         case 'ADD_PRODUCT':

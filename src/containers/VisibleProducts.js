@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import ProductsList from '../components/ProductsList'
-import {deleteProduct} from '../actions'
-
+import {deleteProduct, updateProduct} from '../actions'
+/*
 const getVisibleProduct = (products, filter) => {
     switch (filter) {
         case 'SHOW_COMPLETED':
@@ -12,11 +12,11 @@ const getVisibleProduct = (products, filter) => {
         default:
             return products;
     }
-};
+};*/
 
 const mapStateToProps = (state) => {
     return {
-        products: getVisibleProduct(state.products, 'SHOW_ALL')
+        products: state.products
     }
 };
 
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onDelProduct: (id) => {
             dispatch(deleteProduct(id))
+        },
+        onEditProduct: (id) => {
+            dispatch(updateProduct(id))
         }
     }
 };

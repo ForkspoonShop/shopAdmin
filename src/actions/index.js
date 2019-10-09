@@ -1,18 +1,10 @@
 import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 
 
 export const updateProduct = (products) => {
     return {
         type: 'UPDATE_PRODUCT',
         products
-    }
-};
-
-export const deleteProduct = id => {
-    return {
-        type: 'DELETE_PRODUCT',
-        id
     }
 };
 
@@ -46,40 +38,51 @@ export const setVisibilityFilter = filter => {
 
 export function fetchProduct() {
     return function (dispatch) {
-        const mock = new MockAdapter(axios, {delayResponse: 2000});
-        mock.onGet('/users').reply(30, {
-            products: [
-                {id: 5, url: "./img/IMG_2.jpg", cost: "100", category: "Бр11оши"},
-                {id: 6, url: "./img/IMG_2.jpg", cost: "100", category: "Бр11оши"},
-                {id: 7, url: "./img/IMG_2.jpg", cost: "100", category: "Бр11оши"}
-            ]
-        });
 
-        return axios.get('/users')
+        return axios.get('http://localhost:8080/allproducts')
             .then(function (response) {
                 console.log(response.data);
-                dispatch(updateProduct(response.data.products));
+                dispatch(updateProduct(response.data));
                 dispatch(isLoading(false));
             }).catch(function (error) {
                 console.log(error);
+                dispatch(isLoading(false));
             });
     }
 }
 
 
 export const addProduct = (url, name, cost, description, category) => {
-    //console.log('addProduct', url, name, cost, description, category);
+    console.log('addProduct', url, name, cost, description, category);
 
     return function (dispatch) {
         dispatch(isLoading(true));
 
-        const mock = new MockAdapter(axios, {delayResponse: 20000});
-        mock.onPost('/users').reply(200);
-
-        return axios.post('/users', {url, name, cost, description, category,})
+        return axios.post('http://localhost:8080/addproduct', {URL: url, Name:name, Cost:cost, Description:description, Category:category,headers: {
+                'Content-Type': 'application/json'
+            }})
             .then(function (response) {
                 console.log(response.data);
-                dispatch(fetchProduct());
+                dispatch(fetchProduct())
+            }).catch(function (error) {
+                console.log(error);
+                dispatch(isLoading(false));
+            });
+    }
+};
+
+export const deleteProduct = id => {
+    console.log("delete",id);
+
+    return function (dispatch) {
+        dispatch(isLoading(true));
+
+        return axios.delete('http://localhost:8080/delproduct/'+id, {headers: {
+                'Content-Type': 'application/json'
+            }})
+            .then(function (response) {
+                console.log(response.data);
+                dispatch(fetchProduct())
             }).catch(function (error) {
                 console.log(error);
                 dispatch(isLoading(false));
