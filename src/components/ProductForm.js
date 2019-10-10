@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addProduct, fetchProduct, isLoading, updateProduct} from '../actions'
-import {FormControl, InputLabel, Button, Paper, MenuItem, Select, TextField} from "@material-ui/core";
+import {addProduct, updateProduct} from '../actions'
+import {FormControl, Typography, InputLabel, Button, Paper, MenuItem, Select, TextField} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -17,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-let AddProduct = ({dispatch}, update = false, product, modalClose) => {
+let ProductForm = ({dispatch, update = false, product, modalClose}) => {
     const classes = useStyles();
     const [values, setValues] = React.useState({
         url: '',
@@ -26,20 +25,30 @@ let AddProduct = ({dispatch}, update = false, product, modalClose) => {
         description: '',
         category: '',
     });
-
-
+    if (update) {
+        setValues({
+            url: product.URL,
+            name:  product.Name,
+            cost:  product.Cost,
+            description:  product.Description,
+            category:  product.Category,
+        });
+    }
+    console.log(values);
     const handleChange = event => {
         setValues({...values, [event.target.name]: event.target.value});
     };
 
-
     return (
         <Paper className={classes.paper}>
+            <Typography variant="h6" gutterBottom>
+                {update ? "Изменение товара" : "Добавление товара"}
+            </Typography>
             <form onSubmit={e => {
                 e.preventDefault();
                 console.log("qwweqweqweqweqweqweqwe", values.category);
                 if (update)
-                    dispatch(updateProduct( values.url, values.name, values.cost, values.description, values.category));
+                    dispatch(updateProduct(values.url, values.name, values.cost, values.description, values.category));
                 else
                     dispatch(addProduct(values.url, values.name, values.cost, values.description, values.category));
                 modalClose();
@@ -107,30 +116,14 @@ let AddProduct = ({dispatch}, update = false, product, modalClose) => {
                     </Select>
                 </FormControl>
                 <Button variant="contained" className={classes.button} type="submit" fullWidth>
-                    Add
+                    {update ? "Изменить" : "Добавить"}
                 </Button>
             </form>
         </Paper>
     )
 };
 
-function down(filei) {
-    let formData = new FormData();
-    formData.append("file", './img/IMG_1.jpg');
-    console.log("ffffff", filei);
-    axios.post('http://localhost:8080/upload', formData.get('file'), {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-        .then(function (response) {
-            console.log(response.data);
-        }).catch(function (error) {
-        console.log(error);
-    });
-}
+ProductForm = connect()(ProductForm);
 
-AddProduct = connect()(AddProduct);
-
-export default AddProduct
+export default ProductForm
 

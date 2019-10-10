@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Button, Modal} from "@material-ui/core";
-import AddProduct from "../components/AddProduct";
+import ProductForm from "../components/ProductForm";
 import {fetchProduct} from "../actions";
 
 
@@ -28,7 +28,7 @@ const Header = ({dispatch}) => {
                 open={open}
                 onClose={handleClose}
             >
-                <AddProduct update={false} handleClose/>
+                <ProductForm update={false} modalClose={handleClose}/>
             </Modal>
         </div>
     )

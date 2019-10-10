@@ -43,7 +43,8 @@ const ProductsList = ({products, onDelProduct}) => {
                                 <TableCell>{product.Description}</TableCell>
                                 <TableCell>{product.Category}</TableCell>
                                 <TableCell style={{width: '100px'}} align="center">
-                                    <IconButton aria-label="edit">
+                                    <IconButton aria-label="edit"
+                                                onClick={() => onDelProduct(product.ID)}>
                                         <EditIcon/>
                                     </IconButton>
                                     <IconButton aria-label="delete"
