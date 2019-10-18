@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ProductsList = ({products, onDelProduct}) => {
+const ProductsList = ({products, onEditProduct, onDelProduct}) => {
     const classes = useStyles();
     console.log('ProductsList', products);
     return (
@@ -36,15 +36,15 @@ const ProductsList = ({products, onDelProduct}) => {
                                     {product.ID}
                                 </TableCell>
                                 <TableCell style={{width: '100px'}}>
-                                    <img src={product.URL} width='50px' alt={product.Name}/>
+                                    <img src={'./img/' + product.URL} width='50px' alt={product.Name}/>
                                 </TableCell>
                                 <TableCell>{product.Name}</TableCell>
-                                <TableCell>{product.Cost}</TableCell>
+                                <TableCell>{product.Cost}р</TableCell>
                                 <TableCell>{product.Description}</TableCell>
                                 <TableCell>{product.Category}</TableCell>
                                 <TableCell style={{width: '100px'}} align="center">
                                     <IconButton aria-label="edit"
-                                                onClick={() => onDelProduct(product.ID)}>
+                                                onClick={() => onEditProduct(product)}>
                                         <EditIcon/>
                                     </IconButton>
                                     <IconButton aria-label="delete"

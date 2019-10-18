@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import ProductsList from '../components/ProductsList'
-import {deleteProduct, updateProduct} from '../actions'
+import {deleteProduct, openUpdateProduct} from '../actions'
 /*
 const getVisibleProduct = (products, filter) => {
     switch (filter) {
@@ -25,8 +25,8 @@ const mapDispatchToProps = (dispatch) => {
         onDelProduct: (id) => {
             dispatch(deleteProduct(id))
         },
-        onEditProduct: (id) => {
-            dispatch(updateProduct(id))
+        onEditProduct: (product) => {
+            dispatch(openUpdateProduct(product))
         }
     }
 };
