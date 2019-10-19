@@ -1,13 +1,9 @@
 const isLoading = (state = false, action) => {
-    //console.log('loading: ', state, '|||', action);
     if (action.type === 'ISLOADING')
-        if (action.isloading !== undefined) {
-            console.log(action.isLoading);
+        if (action.isloading !== undefined)
             return action.isLoading;
-        } else {
-            console.log(state);
+         else
             return state;
-        }
     return state;
 };
 

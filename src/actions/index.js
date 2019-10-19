@@ -15,7 +15,6 @@ export const isLoading = isLoading => {
 };
 
 export const isModal = (isModal, updates) => {
-
     console.log('action:ISMODAL', isModal);
     return {
         type: 'ISMODAL',
@@ -29,6 +28,22 @@ export const changeUpdateImage = imageURL => {
     return {
         type: 'CHANGE_UPDATE_IMAGE',
         imageURL
+    }
+};
+
+export const openAddProduct = () => {
+    console.log('action:ISMODAL',);
+    return function (dispatch) {
+        dispatch(changeProductClear());
+        return dispatch(isModal(true, false))
+    }
+};
+
+export const openUpdateProduct = product => {
+    console.log('action:ISMODAL', product);
+    return function (dispatch) {
+        dispatch(changeProductUpdate(product));
+        return dispatch(isModal(true, true))
     }
 };
 
@@ -46,7 +61,6 @@ export const changeProductClear = () => {
         type: 'CHANGE_PRODUCT_CLEAR'
     }
 };
-
 
 const urlAxios = "http://192.168.0.115:8080";
 
@@ -81,14 +95,6 @@ export const addProduct = (url, name, cost, description, category) => {
                 console.log(error);
                 dispatch(isLoading(false));
             });
-    }
-};
-
-export const openUpdateProduct = product => {
-    console.log('action:ISMODAL', product);
-    return function (dispatch) {
-        dispatch(changeProductUpdate(product));
-        return dispatch(isModal(true, true))
     }
 };
 
@@ -132,7 +138,6 @@ export const deleteProduct = id => {
 export const uploadImage = formData => {
     return function (dispatch) {
         dispatch(isLoading(true));
-
         return axios.post(urlAxios + '/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form'

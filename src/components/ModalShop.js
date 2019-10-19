@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import {isModal} from '../actions'
 
 const ModalShop = ({onClose, open}) => {
-    console.log('modalshop', open);
     return (
         <Modal
             aria-labelledby="simple-modal-title"

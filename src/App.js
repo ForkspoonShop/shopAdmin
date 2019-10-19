@@ -1,14 +1,14 @@
 import React from 'react';
-import VisibleProducts from "./containers/VisibleProducts";
-import Loading from "./containers/Loading";
+import Loading from "./components/Loading";
 import Header from "./components/Header";
 import ModalShop from "./components/ModalShop";
+import ProductsList from "./components/ProductsList";
 
 export default function App() {
     return (
         <div className="App">
             <Header/>
-            <VisibleProducts/>
+            <ProductsList/>
             <Loading/>
             <ModalShop/>
         </div>

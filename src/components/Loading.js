@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     progress: {
         position: 'fixed',
         bottom:'30px',

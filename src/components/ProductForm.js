@@ -69,9 +69,10 @@ let ProductForm = ({dispatch, update = false, changingProduct,}) => {
                 setValues({...values, [event.target.name]: event.target.value});
                 break;
             case 'cost':
-                setFormError({...formError, 'cost': false});
-                if (event.target.value.match("^(\\d){0,6}$") !== null)
+                if (event.target.value.match("^(\\d){0,6}$") !== null) {
+                    setFormError({...formError, 'cost': false});
                     setValues({...values, [event.target.name]: event.target.value});
+                }
                 break;
             case 'description':
                 setFormError({...formError, 'description': false});

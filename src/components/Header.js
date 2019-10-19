@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Button} from "@material-ui/core";
-import {fetchProduct, isModal} from "../actions";
+import {fetchProduct, openAddProduct} from "../actions";
 
 const Header = ({onLoads, onOpen}) => {
     return (
@@ -9,7 +9,6 @@ const Header = ({onLoads, onOpen}) => {
             <Button variant="contained" onClick={() => onOpen()} type="button">
                 Добавить товар
             </Button>
-
         </div>
     )
 };
@@ -24,11 +23,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onOpen: () => {
-            console.log('onopen');
-            dispatch(isModal(true))
+            dispatch(openAddProduct())
         },
-        "onLoads": () => {
-            console.log('onload');
+        onLoads: () => {
             dispatch(fetchProduct())
         }
     }

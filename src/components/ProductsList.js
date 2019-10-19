@@ -4,8 +4,10 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {deleteProduct, openUpdateProduct} from "../actions";
+import {connect} from "react-redux";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     paper: {
         margin: '20px 0 0',
     },
@@ -60,4 +62,24 @@ const ProductsList = ({products, onEditProduct, onDelProduct}) => {
     )
 };
 
-export default ProductsList;
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDelProduct: (id) => {
+            dispatch(deleteProduct(id))
+        },
+        onEditProduct: (product) => {
+            dispatch(openUpdateProduct(product))
+        }
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProductsList)

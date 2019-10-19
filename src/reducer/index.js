@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import {combineReducers} from 'redux'
 import products from './products'
 import isLoading from './isLoading'
 import changingProduct from "./changingProduct";
